@@ -105,9 +105,9 @@ with st.expander("**⚙️ INPUT PARAMETERS (Click to Expand / Collapse)**", exp
     # --- CỘT 1: Thông số Hình học (DÙNG SLIDER) ---
     with col1:
         st.subheader("1. Geometry Configuration")
-        b = st.slider("Beam width - b (mm)", min_value=100, max_value=250, value=150, step=10)
-        hc = st.slider("Concrete height - hc (mm)", min_value=100, max_value=250, value=170, step=10)
-        hECC = st.slider("ECC height - hECC (mm)", min_value=20, max_value=150, value=30, step=5)
+        b = st.slider("Beam width - b (mm)", min_value=100, max_value=250, value=150, step=1)
+        hc = st.slider("Concrete height - hc (mm)", min_value=100, max_value=250, value=170, step=1)
+        hECC = st.slider("ECC height - hECC (mm)", min_value=20, max_value=150, value=30, step=1)
         
         h_total = hc + hECC
         st.info(f"💡 Total section height (h) auto-calculated: **{h_total} mm**")
@@ -145,11 +145,11 @@ with st.expander("**⚙️ INPUT PARAMETERS (Click to Expand / Collapse)**", exp
                        step=0.001, format="%.3f")
                        
         tb_p = st.slider("Top/Bottom plate thickness - tb,p (mm)", 
-                         min_value=20, max_value=100, value=50, step=5)
+                         min_value=20, max_value=100, value=50, step=1)
                          
         tw_p = st.slider("Web plate thickness - tw,p (mm)", 
                          min_value=2.0, max_value=10.0, value=4.0, 
-                         step=0.5, format="%.1f")
+                         step=0.1, format="%.1f")
 
     st.markdown("---")
     
