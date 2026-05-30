@@ -105,9 +105,9 @@ with st.expander("**⚙️ INPUT PARAMETERS (Click to Expand / Collapse)**", exp
     # --- CỘT 1: Thông số Hình học (DÙNG SLIDER) ---
     with col1:
         st.subheader("1. Geometry Configuration")
-        b = st.slider("Beam width - b (mm)", min_value=100, max_value=250, value=150, step=1)
-        hc = st.slider("Concrete height - hc (mm)", min_value=100, max_value=250, value=170, step=1)
-        hECC = st.slider("ECC height - hECC (mm)", min_value=20, max_value=150, value=30, step=1)
+        b = st.slider("Beam width - b (mm)", min_value=150, max_value=260, value=150, step=1)
+        hc = st.slider("Concrete height - hc (mm)", min_value=100, max_value=280, value=170, step=1)
+        hECC = st.slider("ECC height - hECC (mm)", min_value=30, max_value=100, value=30, step=1)
         
         h_total = hc + hECC
         st.info(f"💡 Total section height (h) auto-calculated: **{h_total} mm**")
