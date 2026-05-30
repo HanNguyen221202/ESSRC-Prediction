@@ -112,25 +112,35 @@ with st.expander("**⚙️ INPUT PARAMETERS (Click to Expand / Collapse)**", exp
         h_total = hc + hECC
         st.info(f"💡 Total section height (h) auto-calculated: **{h_total} mm**")
 
-    # --- CỘT 2: Thông số Vật liệu Bê tông & ECC (TỰ ĐỘNG TÍNH Ec) ---
+    # --- CỘT 2: Thông số Vật liệu Bê tông & ECC (ÉP GIÁ TRỊ TĨNH) ---
     with col2:
         st.subheader("2. Material Properties")
         
-        # 1. Khai báo f'c,c bằng thanh trượt Slider
-        fc_c = st.slider("NC compressive strength - f'c,c (MPa)", 15.0, 35.0, 17.12, step=0.01, format="%.2f")
+        # 1. Khai báo f'c,c bằng Hộp chọn thả xuống (chỉ có 2 giá trị)
+        fc_c = st.selectbox("NC compressive strength - f'c,c (MPa)", [17.12, 27.54])
         
-        # Tự động tính toán Ec,c bằng nội suy tuyến tính dựa theo các cặp điểm trong tập dữ liệu (17.12 -> 20000; 27.54 -> 25000)
-        Ec_c = int(np.interp(fc_c, [17.12, 27.54], [20000, 25000]))
-        st.info(f"💡 NC elastic modulus - Ec,c auto-calculated: **{Ec_c} MPa**")
+        # Gán tĩnh Ec_c tương ứng với f'c,c
+        if fc_c == 17.12:
+            Ec_c = 20000
+        else:
+            Ec_c = 25000
+            
+        st.info(f"💡 NC elastic modulus - Ec,c auto-assigned: **{Ec_c} MPa**")
         
         st.markdown("---")
         
-        # 2. Khai báo f'c,ECC bằng thanh trượt Slider
-        fc_ECC = st.slider("ECC compressive strength - f'c,ECC (MPa)", 25.0, 55.0, 30.76, step=0.01, format="%.2f")
+        # 2. Khai báo f'c,ECC bằng Hộp chọn thả xuống (chỉ có 3 giá trị)
+        fc_ECC = st.selectbox("ECC compressive strength - f'c,ECC (MPa)", [30.76, 43.07, 52.30])
         
-        # Tự động tính toán Ec,ECC tương tự dựa theo xu hướng thực nghiệm của vật liệu ECC
-        Ec_ECC = int(np.interp(fc_ECC, [30.76, 55.0], [15500, 19500]))
-        st.info(f"💡 ECC elastic modulus - Ec,ECC auto-calculated: **{Ec_ECC} MPa**")
+        # Gán tĩnh Ec_ECC tương ứng với f'c,ECC
+        if fc_ECC == 30.76:
+            Ec_ECC = 15500
+        elif fc_ECC == 43.07:
+            Ec_ECC = 17000
+        else:
+            Ec_ECC = 18000
+            
+        st.info(f"💡 ECC elastic modulus - Ec,ECC auto-assigned: **{Ec_ECC} MPa**")
 
     # --- CỘT 3: Cốt thép & Vách thép ---
     with col3:
