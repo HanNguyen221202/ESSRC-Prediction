@@ -141,15 +141,15 @@ with st.expander("**⚙️ INPUT PARAMETERS (Click to Expand / Collapse)**", exp
         st.subheader("3. Steel & Reinforcement")
         
         us = st.slider("Reinforcement ratio - μs (%)", 
-                       min_value=0.500, max_value=3.000, value=1.577, 
+                       min_value=0.258, max_value=1.996, value=1.577, 
                        step=0.001, format="%.3f")
                        
         tb_p = st.slider("Top/Bottom plate thickness - tb,p (mm)", 
-                         min_value=20, max_value=100, value=50, step=1)
+                         min_value=50, max_value=150, value=50, step=1)
                          
         tw_p = st.slider("Web plate thickness - tw,p (mm)", 
-                         min_value=2.0, max_value=10.0, value=4.0, 
-                         step=0.1, format="%.1f")
+                         min_value=4, max_value=6, value=4, 
+                         step=1, format="%.1f")
 
     st.markdown("---")
     
