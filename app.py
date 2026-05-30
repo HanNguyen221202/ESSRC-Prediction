@@ -60,8 +60,8 @@ st.markdown(
 # 2. CẤU HÌNH TRANG VÀ TIÊU ĐỀ
 # ==========================================
 st.set_page_config(page_title="ESSRC Beam Predictor", layout="wide")
-st.title("Prediction of Flexural Capacity of ESSRC Beams")
-st.markdown("##### **Developed by:** [Tên của bạn/Nhóm nghiên cứu của bạn]")
+st.title("Flexural Capacity Prediction of ECC Layer and Steel Plate Strengthened RC (ESSRC) Beams")
+st.markdown("##### **Developed by:** ")
 st.markdown("---")
 
 # ==========================================
@@ -178,7 +178,6 @@ if run_button:
         # Khung hiển thị kết quả
         col_res1, col_res2 = st.columns(2)
         with col_res1:
-            # LƯU Ý: Bạn hãy thay số 2.15 này bằng giá trị MAE thực tế của mô hình bạn
             MAE_error = 2.15 
             
             st.markdown("<p style='font-size: 24px; font-weight: bold; margin-bottom: 0px;'>Predicted Flexural Capacity of ESSRC Beam (Mu)</p>", unsafe_allow_html=True)
@@ -193,7 +192,7 @@ if run_button:
             st.markdown("<p style='font-size: 14px; color: #09AB3B; margin-top: 5px;'>↑ ANN Model (R² = 0.98)</p>", unsafe_allow_html=True)
         
         with col_res2:
-             st.info(f"Target Design Status: Ready for review")
+             st.info(f"Overall Dimensions (b x h x L): **{b} x {h_total} x 2000 mm**")
 
 # ==========================================
 # 6. HIỂN THỊ HÌNH ẢNH MÔ TẢ & SHAP (NẾU CÓ)
@@ -205,6 +204,6 @@ st.markdown("### Explainable AI")
 image_path = os.path.join(BASE_DIR, 'essrc_shap_info.PNG')
 
 if os.path.exists(image_path):
-    st.image(image_path, use_container_width=True, caption="Geometric parameters and SHAP-based feature importance analysis")
+    st.image(image_path, use_container_width=True, caption="Explainable AI SHAP-based feature importance analysis")
 else:
     st.warning("Vui lòng thêm file ảnh 'essrc_shap_info.png' vào thư mục để hiển thị hình minh họa.")
