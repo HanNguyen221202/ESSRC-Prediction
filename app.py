@@ -105,28 +105,39 @@ with st.expander("**⚙️ INPUT PARAMETERS (Click to Expand / Collapse)**", exp
     # --- CỘT 1: Thông số Hình học ---
     with col1:
         st.subheader("1. Geometry Configuration")
-        b = st.number_input("Beam width - b (mm)", value=150.0, step=10.0)
-        hc = st.number_input("Concrete height - hc (mm)", value=170.0, step=10.0)
-        hECC = st.number_input("ECC height - hECC (mm)", value=30.0, step=5.0)
+        b = st.number_input("Beam width - b (mm)", value=150, step=10)
+        hc = st.number_input("Concrete height - hc (mm)", value=170, step=10)
+        hECC = st.number_input("ECC height - hECC (mm)", value=30, step=5)
         
-        # Ví dụ tự động tính toán tổng chiều cao
         h_total = hc + hECC
-        st.info(f"💡 Total section height (h) auto-calculated: **{h_total:.1f} mm**")
+        st.info(f"💡 Total section height (h) auto-calculated: **{h_total} mm**")
 
-    # --- CỘT 2: Thông số Vật liệu Bê tông & ECC ---
+    # --- CỘT 2: Thông số Vật liệu Bê tông & ECC (TỰ ĐỘNG TÍNH Ec) ---
     with col2:
         st.subheader("2. Material Properties")
-        fc_c = st.number_input("NC compressive strength - f'c,c (MPa)", value=17.12, step=1.0)
-        Ec_c = st.number_input("NC elastic modulus - Ec,c (MPa)", value=20000.0, step=1000.0)
-        fc_ECC = st.number_input("ECC compressive strength - f'c,ECC (MPa)", value=30.76, step=1.0)
-        Ec_ECC = st.number_input("ECC elastic modulus - Ec,ECC (MPa)", value=15500.0, step=500.0)
+        
+        # 1. Khai báo f'c,c bằng thanh trượt Slider
+        fc_c = st.slider("NC compressive strength - f'c,c (MPa)", 15.0, 35.0, 17.12, step=0.01, format="%.2f")
+        
+        # Tự động tính toán Ec,c bằng nội suy tuyến tính dựa theo các cặp điểm trong tập dữ liệu (17.12 -> 20000; 27.54 -> 25000)
+        Ec_c = int(np.interp(fc_c, [17.12, 27.54], [20000, 25000]))
+        st.info(f"💡 NC elastic modulus - Ec,c auto-calculated: **{Ec_c} MPa**")
+        
+        st.markdown("---")
+        
+        # 2. Khai báo f'c,ECC bằng thanh trượt Slider
+        fc_ECC = st.slider("ECC compressive strength - f'c,ECC (MPa)", 25.0, 55.0, 30.76, step=0.01, format="%.2f")
+        
+        # Tự động tính toán Ec,ECC tương tự dựa theo xu hướng thực nghiệm của vật liệu ECC
+        Ec_ECC = int(np.interp(fc_ECC, [30.76, 55.0], [15500, 19500]))
+        st.info(f"💡 ECC elastic modulus - Ec,ECC auto-calculated: **{Ec_ECC} MPa**")
 
     # --- CỘT 3: Cốt thép & Vách thép ---
     with col3:
         st.subheader("3. Steel & Reinforcement")
-        us = st.number_input("Reinforcement ratio - μs (%)", value=1.577, step=0.1, format="%.3f")
-        tb_p = st.number_input("Top/Bottom plate thickness - tb,p (mm)", value=50.0, step=5.0)
-        tw_p = st.number_input("Web plate thickness - tw,p (mm)", value=4.0, step=0.5)
+        us = st.number_input("Reinforcement ratio - μs (%)", value=1.577, step=0.100, format="%.3f")
+        tb_p = st.number_input("Top/Bottom plate thickness - tb,p (mm)", value=50, step=5)
+        tw_p = st.number_input("Web plate thickness - tw,p (mm)", value=4.0, step=0.5, format="%.1f")
 
     st.markdown("---")
     
