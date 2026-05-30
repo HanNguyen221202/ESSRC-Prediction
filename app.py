@@ -71,7 +71,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 @st.cache_resource
 def load_assets():
-    model_path = os.path.join(BASE_DIR, 'mo_hinh_ann.h5')
+    model_path = os.path.join(BASE_DIR, 'essrc_ann_model.h5')
     scaler_path = os.path.join(BASE_DIR, 'scaler_manual.pkl')
     
     if not os.path.exists(model_path):
@@ -179,7 +179,7 @@ st.markdown("---")
 st.markdown("### Explainable AI")
 
 # Thay đổi tên file ảnh 'essrc_shap_info.png' cho đúng với ảnh bạn đưa vào thư mục nhé
-image_path = os.path.join(BASE_DIR, 'essrc_shap_info.png')
+image_path = os.path.join(BASE_DIR, 'essrc_shap_info.PNG')
 
 if os.path.exists(image_path):
     st.image(image_path, use_container_width=True, caption="Geometric parameters and SHAP-based feature importance analysis")
