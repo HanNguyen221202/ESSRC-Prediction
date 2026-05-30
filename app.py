@@ -96,18 +96,18 @@ except Exception as e:
     st.stop()
 
 # ==========================================
-# 4. GIAO DIỆN NHẬP LIỆU (EXPANDER & 3 CỘT)
+# 4. GIAO DIỆN NHẬP LIỆU (EXPANDER & 3 CỘT ĐỒNG BỘ SLIDER)
 # ==========================================
 with st.expander("**⚙️ INPUT PARAMETERS (Click to Expand / Collapse)**", expanded=True):
     
     col1, col2, col3 = st.columns(3)
     
-    # --- CỘT 1: Thông số Hình học ---
+    # --- CỘT 1: Thông số Hình học (DÙNG SLIDER) ---
     with col1:
         st.subheader("1. Geometry Configuration")
-        b = st.number_input("Beam width - b (mm)", value=150, step=10)
-        hc = st.number_input("Concrete height - hc (mm)", value=170, step=10)
-        hECC = st.number_input("ECC height - hECC (mm)", value=30, step=5)
+        b = st.slider("Beam width - b (mm)", min_value=100, max_value=250, value=150, step=10)
+        hc = st.slider("Concrete height - hc (mm)", min_value=100, max_value=250, value=170, step=10)
+        hECC = st.slider("ECC height - hECC (mm)", min_value=20, max_value=150, value=30, step=5)
         
         h_total = hc + hECC
         st.info(f"💡 Total section height (h) auto-calculated: **{h_total} mm**")
@@ -116,34 +116,40 @@ with st.expander("**⚙️ INPUT PARAMETERS (Click to Expand / Collapse)**", exp
     with col2:
         st.subheader("2. Material Properties")
         
-        # 1. Khai báo f'c,c bằng thanh trượt (Giới hạn đúng từ 17.12 đến 27.54)
+        # 1. Khai báo f'c,c
         fc_c = st.slider("NC compressive strength - f'c,c (MPa)", 
                          min_value=17.12, max_value=27.54, value=17.12, 
                          step=0.01, format="%.2f")
         
-        # Nội suy tuyến tính Ec_c theo f'c,c
         Ec_c = int(np.interp(fc_c, [17.12, 27.54], [20000, 25000]))
         st.info(f"💡 NC elastic modulus - Ec,c auto-calculated: **{Ec_c} MPa**")
         
         st.markdown("---")
         
-        # 2. Khai báo f'c,ECC bằng thanh trượt (Giới hạn đúng từ 30.76 đến 52.30)
+        # 2. Khai báo f'c,ECC
         fc_ECC = st.slider("ECC compressive strength - f'c,ECC (MPa)", 
                            min_value=30.76, max_value=52.30, value=30.76, 
                            step=0.01, format="%.2f")
         
-        # Nội suy từng mảng (Piecewise interpolation) qua đúng 3 điểm train của bạn
         Ec_ECC = int(np.interp(fc_ECC, 
                                [30.76, 43.07, 52.30], 
                                [15500, 17000, 18000]))
         st.info(f"💡 ECC elastic modulus - Ec,ECC auto-calculated: **{Ec_ECC} MPa**")
-        
-    # --- CỘT 3: Cốt thép & Vách thép ---
+
+    # --- CỘT 3: Cốt thép & Vách thép (DÙNG SLIDER) ---
     with col3:
         st.subheader("3. Steel & Reinforcement")
-        us = st.number_input("Reinforcement ratio - μs (%)", value=1.577, step=0.100, format="%.3f")
-        tb_p = st.number_input("Top/Bottom plate thickness - tb,p (mm)", value=50, step=5)
-        tw_p = st.number_input("Web plate thickness - tw,p (mm)", value=4.0, step=0.5, format="%.1f")
+        
+        us = st.slider("Reinforcement ratio - μs (%)", 
+                       min_value=0.500, max_value=3.000, value=1.577, 
+                       step=0.001, format="%.3f")
+                       
+        tb_p = st.slider("Top/Bottom plate thickness - tb,p (mm)", 
+                         min_value=20, max_value=100, value=50, step=5)
+                         
+        tw_p = st.slider("Web plate thickness - tw,p (mm)", 
+                         min_value=2.0, max_value=10.0, value=4.0, 
+                         step=0.5, format="%.1f")
 
     st.markdown("---")
     
