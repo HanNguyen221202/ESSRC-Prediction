@@ -144,10 +144,10 @@ with st.expander("**⚙️ INPUT PARAMETERS (Click to Expand / Collapse)**", exp
                        min_value=0.258, max_value=1.996, value=1.577, 
                        step=0.001, format="%.3f")
                        
-        tb_p = st.slider("Top/Bottom plate thickness - tb,p (mm)", 
+        tb_p = st.slider("Steel plate width - tb,p (mm)", 
                          min_value=50, max_value=150, value=50, step=1)
                          
-        tw_p = st.slider("Web plate thickness - tw,p (mm)", 
+        tw_p = st.slider("Steel plate thickness - tw,p (mm)", 
                          min_value=4.0, max_value=6.0, value=4.0, 
                          step=0.1, format="%.1f")
 
