@@ -61,7 +61,7 @@ st.markdown(
 # ==========================================
 st.set_page_config(page_title="ESSRC Beam Predictor", layout="wide")
 st.title("Flexural Capacity Prediction of ECC Layer and Steel Plate Strengthened RC (ESSRC) Beams")
-st.markdown("##### **Developed by:** ")
+st.markdown("#### **Developed by: *Cong-Luyen Nguyen* ")
 st.markdown("---")
 
 # ==========================================
