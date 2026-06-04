@@ -12,7 +12,7 @@ st.markdown(
     <style>
     /* ---- THÊM ĐOẠN NÀY ĐỂ ĐỔI MÀU NỀN TOÀN TRANG ---- */
     .stApp {
-        background-color: #F5F5F5 !important; /* Màu xám bạc nhạt */
+        background-color: #BEBDB8 !important; /* Màu xám bạc nhạt */
     }
     /* 1. Kích thước chữ của các mục lớn (st.subheader) */
     h3 {
