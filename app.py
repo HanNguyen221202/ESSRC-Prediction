@@ -10,6 +10,10 @@ import os
 st.markdown(
     """
     <style>
+    /* ---- THÊM ĐOẠN NÀY ĐỂ ĐỔI MÀU NỀN TOÀN TRANG ---- */
+    .stApp {
+        background-color: #F0F2F6 !important; /* Màu xám bạc nhạt */
+    }
     /* 1. Kích thước chữ của các mục lớn (st.subheader) */
     h3 {
         font-size: 26px !important;
@@ -61,7 +65,7 @@ st.markdown(
 # ==========================================
 st.set_page_config(page_title="ESSRC Beam Predictor", layout="wide")
 st.title("Flexural Capacity Prediction of ECC Layer and Steel Plate Strengthened RC (ESSRC) Beams")
-st.markdown("#### **Developed by: *Cong-Luyen Nguyen* ")
+st.markdown("#### Developed by: *Cong-Luyen Nguyen* ")
 st.markdown("---")
 
 # ==========================================
